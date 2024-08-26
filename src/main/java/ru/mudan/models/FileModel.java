@@ -18,6 +18,6 @@ public class FileModel {
     private String description;
     @Column(name = "created_date",columnDefinition = "TIMESTAMP")
     private LocalDateTime createdDate;
-    @Column(name = "location",columnDefinition = "bytea")
+    @Column(name = "file",columnDefinition = "bytea")
     private byte[] fileBytes;
 }

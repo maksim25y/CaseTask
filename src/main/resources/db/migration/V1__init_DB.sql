@@ -3,5 +3,5 @@ create table files(
     title varchar,
     description varchar,
     created_date timestamp,
-    location bytea
+    file bytea
 );
