@@ -3,7 +3,7 @@ package ru.mudan.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -17,7 +17,7 @@ public class FileModel {
     @Column
     private String description;
     @Column(name = "created_date")
-    private Timestamp date;
+    private LocalDate date;
     @Column(name = "location")
     private String location;
 }
