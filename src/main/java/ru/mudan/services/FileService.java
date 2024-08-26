@@ -38,22 +38,19 @@ public class FileService {
     }
     public FileDTO getFileModelById(Long id){
         Optional<FileModel>optionalFileModel = fileRepository.findById(id);
-        if(optionalFileModel.isPresent()){
-            FileModel fileModel = optionalFileModel.get();
+        return optionalFileModel.map(fileModel -> {
             FileDTO fileDTO = new FileDTO();
             fileDTO.setTitle(fileModel.getTitle());
             fileDTO.setDescription(fileModel.getDescription());
             fileDTO.setCreatedDate(String.valueOf(fileModel.getCreatedDate()));
             fileDTO.setFile(convertBytesToBase64(fileModel.getFileBytes()));
             return fileDTO;
-        }
-        return null;
+        }).orElse(null);
     }
     private String convertBytesToBase64(byte[]bytes){
         return Base64.getEncoder().encodeToString(bytes);
     }
     private byte[]convertBase64eToBytes(String base64){
-        System.out.println(base64);
         return Base64.getDecoder().decode(base64);
     }
 }

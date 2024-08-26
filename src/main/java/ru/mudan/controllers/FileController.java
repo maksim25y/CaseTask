@@ -17,11 +17,14 @@ public class FileController {
     }
     @PostMapping("/create")
     public ResponseEntity<Object>saveFile(@RequestBody FileDTO fileDTO){
-        System.out.println(fileDTO);
         return new ResponseEntity<>(fileService.saveFile(fileDTO),HttpStatus.OK);
     }
     @GetMapping("/get")
     public ResponseEntity<Object>saveFile(@RequestParam Long id){
+        FileDTO fileDTO = fileService.getFileModelById(id);
+        if(fileDTO==null){
+            return new ResponseEntity<>(String.format("File with id %s not found",id),HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(fileService.getFileModelById(id),HttpStatus.OK);
     }
 }
