@@ -26,9 +26,9 @@ public class FileService {
         fileModelForSaving.setTitle(fileDTO.getTitle());
         fileModelForSaving.setDescription(fileDTO.getDescription());
         String dateInFileDTO = fileDTO.getCreatedDate();
-        LocalDateTime localDateTime = ZonedDateTime.parse(dateInFileDTO).toLocalDateTime();
-        fileModelForSaving.setCreatedDate(localDateTime);
         try{
+            LocalDateTime localDateTime = ZonedDateTime.parse(dateInFileDTO).toLocalDateTime();
+            fileModelForSaving.setCreatedDate(localDateTime);
             fileModelForSaving.setFileBytes(convertBase64eToBytes(fileDTO.getFile()));
         }catch (Exception e){
             return null;

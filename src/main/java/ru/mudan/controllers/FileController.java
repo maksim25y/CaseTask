@@ -19,7 +19,7 @@ public class FileController {
     public ResponseEntity<Object>saveFile(@RequestBody FileDTO fileDTO){
         Long resultId = fileService.saveFile(fileDTO);
         if(resultId==null){
-            return new ResponseEntity<>("Error of encode file",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Data from JSON an incorrect format",HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(resultId,HttpStatus.OK);
     }
