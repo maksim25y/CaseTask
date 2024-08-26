@@ -20,4 +20,8 @@ public class FileController {
         System.out.println(fileDTO);
         return new ResponseEntity<>(fileService.saveFile(fileDTO),HttpStatus.OK);
     }
+    @GetMapping("/get")
+    public ResponseEntity<Object>saveFile(@RequestParam Long id){
+        return new ResponseEntity<>(fileService.getFileModelById(id),HttpStatus.OK);
+    }
 }
