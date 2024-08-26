@@ -24,7 +24,7 @@ public class FileController {
         return new ResponseEntity<>(resultId,HttpStatus.OK);
     }
     @GetMapping("/get")
-    public ResponseEntity<Object>saveFile(@RequestParam Long id){
+    public ResponseEntity<Object>getFile(@RequestParam Long id){
         FileDTO fileDTO = fileService.getFileModelById(id);
         if(fileDTO==null){
             return new ResponseEntity<>(String.format("File with id %s not found",id),HttpStatus.NOT_FOUND);
