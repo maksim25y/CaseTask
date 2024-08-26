@@ -17,7 +17,11 @@ public class FileController {
     }
     @PostMapping("/create")
     public ResponseEntity<Object>saveFile(@RequestBody FileDTO fileDTO){
-        return new ResponseEntity<>(fileService.saveFile(fileDTO),HttpStatus.OK);
+        Long resultId = fileService.saveFile(fileDTO);
+        if(resultId==null){
+            return new ResponseEntity<>("Error of encode file",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(resultId,HttpStatus.OK);
     }
     @GetMapping("/get")
     public ResponseEntity<Object>saveFile(@RequestParam Long id){

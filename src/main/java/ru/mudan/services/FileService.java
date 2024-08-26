@@ -8,8 +8,6 @@ import ru.mudan.dto.FileDTO;
 import ru.mudan.models.FileModel;
 import ru.mudan.repository.FileRepository;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Base64;
@@ -30,10 +28,12 @@ public class FileService {
         String dateInFileDTO = fileDTO.getCreatedDate();
         LocalDateTime localDateTime = ZonedDateTime.parse(dateInFileDTO).toLocalDateTime();
         fileModelForSaving.setCreatedDate(localDateTime);
-        byte[]bytes = convertBase64eToBytes(fileDTO.getFile());
-        fileModelForSaving.setFileBytes(bytes);
+        try{
+            fileModelForSaving.setFileBytes(convertBase64eToBytes(fileDTO.getFile()));
+        }catch (Exception e){
+            return null;
+        }
         FileModel fileModel = fileRepository.save(fileModelForSaving);
-        System.out.println(fileModel);
         return fileModel.getId();
     }
     public FileDTO getFileModelById(Long id){
@@ -51,6 +51,10 @@ public class FileService {
         return Base64.getEncoder().encodeToString(bytes);
     }
     private byte[]convertBase64eToBytes(String base64){
-        return Base64.getDecoder().decode(base64);
+        try {
+            return Base64.getDecoder().decode(base64);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Provided string is not a valid Base64 encoded string");
+        }
     }
 }
