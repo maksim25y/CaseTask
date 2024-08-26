@@ -31,4 +31,13 @@ public class FileController {
         }
         return new ResponseEntity<>(fileService.getFileModelById(id),HttpStatus.OK);
     }
+    @GetMapping("/all")
+    public ResponseEntity<Object>getAllFiles(@RequestParam(required = false, defaultValue = "false") Boolean sortByCreatedDate,
+                                             @RequestParam(required = false)Integer count,
+                                             @RequestParam(required = false)Integer number){
+        if(number!=null&&count!=null){
+            return new ResponseEntity<>(fileService.getAllFilesWithPagination(count,number,sortByCreatedDate),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(fileService.getAllFilesSortByDate(sortByCreatedDate), HttpStatus.OK);
+    }
 }

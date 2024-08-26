@@ -10,8 +10,11 @@ import ru.mudan.repository.FileRepository;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -38,14 +41,36 @@ public class FileService {
     }
     public FileDTO getFileModelById(Long id){
         Optional<FileModel>optionalFileModel = fileRepository.findById(id);
-        return optionalFileModel.map(fileModel -> {
-            FileDTO fileDTO = new FileDTO();
-            fileDTO.setTitle(fileModel.getTitle());
-            fileDTO.setDescription(fileModel.getDescription());
-            fileDTO.setCreatedDate(String.valueOf(fileModel.getCreatedDate()));
-            fileDTO.setFile(convertBytesToBase64(fileModel.getFileBytes()));
-            return fileDTO;
-        }).orElse(null);
+        return optionalFileModel.map(this::convertFileModelToFileDTO).orElse(null);
+    }
+    public List<FileDTO>getAllFilesSortByDate(boolean sortByDate){
+        if(sortByDate){
+            return fileRepository.findAllByOrderByCreatedDateAsc()
+                    .stream()
+                    .map(this::convertFileModelToFileDTO).collect(Collectors.toList());
+        }
+        return fileRepository.findAll().stream()
+                .map(this::convertFileModelToFileDTO).collect(Collectors.toList());
+    }
+    public List<FileDTO>getAllFilesWithPagination(Integer count,Integer number,boolean sortByCreatedDate){
+        List<FileDTO>fileDTOList = getAllFilesSortByDate(sortByCreatedDate);
+        List<FileDTO>result = new ArrayList<>();
+        int pos=count*(number-1);
+        int sizeOfList = fileDTOList.size();
+        while (pos<sizeOfList&&count!=0){
+            result.add(fileDTOList.get(pos));
+            pos++;
+            count--;
+        }
+        return result;
+    }
+    private FileDTO convertFileModelToFileDTO(FileModel fileModel){
+        FileDTO fileDTO = new FileDTO();
+        fileDTO.setTitle(fileModel.getTitle());
+        fileDTO.setDescription(fileModel.getDescription());
+        fileDTO.setCreatedDate(String.valueOf(fileModel.getCreatedDate()));
+        fileDTO.setFile(convertBytesToBase64(fileModel.getFileBytes()));
+        return fileDTO;
     }
     private String convertBytesToBase64(byte[]bytes){
         return Base64.getEncoder().encodeToString(bytes);
