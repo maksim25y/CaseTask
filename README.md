@@ -28,3 +28,9 @@ docker-compose up
 
 Чтобы остановить работу контейнеров, в терминале, откуда вы запускали docker-compose нажмите Ctrl+C (Control + C для Mac)
 </details>
+<details><summary>Функционал</summary>
+Создание файла с корректными данными:
+![image](https://github.com/user-attachments/assets/4f3da2e3-d2d0-41ff-9e38-dfb5336524c3)
+
+  
+</details>
