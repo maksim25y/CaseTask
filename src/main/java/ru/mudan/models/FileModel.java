@@ -3,7 +3,7 @@ package ru.mudan.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Data
@@ -17,7 +17,7 @@ public class FileModel {
     @Column
     private String description;
     @Column(name = "created_date",columnDefinition = "TIMESTAMP")
-    private LocalDateTime createdDate;
+    private ZonedDateTime createdDate;
     @Column(name = "file",columnDefinition = "bytea")
     private byte[] fileBytes;
 }

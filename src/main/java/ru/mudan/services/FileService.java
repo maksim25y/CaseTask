@@ -10,6 +10,7 @@ import ru.mudan.repository.FileRepository;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -30,7 +31,7 @@ public class FileService {
         fileModelForSaving.setDescription(fileDTO.getDescription());
         String dateInFileDTO = fileDTO.getCreatedDate();
         try{
-            LocalDateTime localDateTime = ZonedDateTime.parse(dateInFileDTO).toLocalDateTime();
+            ZonedDateTime localDateTime = ZonedDateTime.parse(dateInFileDTO);
             fileModelForSaving.setCreatedDate(localDateTime);
             fileModelForSaving.setFileBytes(convertBase64eToBytes(fileDTO.getFile()));
         }catch (Exception e){
@@ -68,7 +69,7 @@ public class FileService {
         FileDTO fileDTO = new FileDTO();
         fileDTO.setTitle(fileModel.getTitle());
         fileDTO.setDescription(fileModel.getDescription());
-        fileDTO.setCreatedDate(String.valueOf(fileModel.getCreatedDate()));
+        fileDTO.setCreatedDate(fileModel.getCreatedDate().format(DateTimeFormatter.ISO_INSTANT));
         fileDTO.setFile(convertBytesToBase64(fileModel.getFileBytes()));
         return fileDTO;
     }
