@@ -116,7 +116,7 @@ docker-compose up
 
 ![image](https://github.com/user-attachments/assets/bb64fc27-b2c1-4a70-a7f2-16408776b4c5)
 
-Был добавлен метод для конвертаци набора байтов в base64:
+Был добавлен метод для конвертации набора байтов в base64:
 
 ![image](https://github.com/user-attachments/assets/d9f49125-822c-4a1a-982c-67f08107a169)
 
