@@ -69,14 +69,16 @@ docker-compose up
 
 ![image](https://github.com/user-attachments/assets/227b652b-3e39-4557-bd5b-fbbf5e051851)
 
+</details>
+<details><summary>Описание решения</summary>
+Используемые технологии: Spring Boot, Spring Data JPA, Flyway, Docker, PostgreSQL, JUnit.
+Был добавлен Dockerfile для сборки приложения:
+  
+![image](https://github.com/user-attachments/assets/928dc727-d18b-484a-bd15-61c1365e4f13)
 
+Был добавлен docker-compose.yaml для запука приложения в контейнере. В нём же происходит создание БД. Чтение данных (Пароль к БД, Логин к БД и др) идёт из файла .env.docker.
 
-
-
-
-
-
-
+![image](https://github.com/user-attachments/assets/4d597665-cddf-4232-af16-eb640382330d)
 
 
 
