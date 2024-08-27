@@ -30,7 +30,9 @@ docker-compose up
 </details>
 <details><summary>Функционал</summary>
 Создание файла с корректными данными:
-![image](https://github.com/user-attachments/assets/4f3da2e3-d2d0-41ff-9e38-dfb5336524c3)
+
+![image](https://github.com/user-attachments/assets/86022100-b244-42d1-ad50-5f586ad3c1c0)
+
 
   
 </details>
